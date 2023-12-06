@@ -32,7 +32,6 @@ export const getProductById = async (req, res) => {
 
 export const decrementProductQuantity = async (req, res) => {
   const { productId, quantity } = req.body;
-  console.log(productId, quantity);
   try {
     const product = await Product.findById(productId);
 
@@ -100,7 +99,6 @@ export const postProductReview = async (req, res) => {
       product.reviews = [];
     }
 
-    console.log(user);
     user.reviews.push(postReview._id);
     product.reviews.push(postReview);
 

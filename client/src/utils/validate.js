@@ -21,9 +21,6 @@ export const isValidRating = (value, errorMessage) => {
 };
 
 export const validateLoginForm = (email, password) => {
-  console.log("Email:", email);
-  console.log(password);
-
   const errors = {};
 
   const emailError = isValidString(
@@ -177,12 +174,10 @@ export const validateReviewForm = (formData) => {
     "Review description must be less than 200 characters",
   );
 
-  // console.log("formData.rating: ", formData.rating);
   const ratingError = isValidRating(
     formData.rating,
     "Rating must be between 1 and 5",
   );
-  // console.log("Rating Error: ", ratingError);
   if (ratingError) {
     errors.rating = ratingError;
   }

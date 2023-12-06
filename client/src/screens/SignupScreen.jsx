@@ -59,11 +59,9 @@ const SignupScreen = () => {
       );
 
       const { success, message, user } = data;
-      console.log(data);
 
       if (user) {
         const { _id, firstName, lastName, email } = user;
-        // console.log(user);
         const userData = {
           _id,
           firstName,

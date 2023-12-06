@@ -47,8 +47,6 @@ const CartSummary = ({ onClickFunction, totalPrice, buttonCta }) => {
         { withCredentials: true },
       );
 
-      console.log(response.data);
-
       if (response.data) {
         await Promise.all(
           cart.map(async (item) => {

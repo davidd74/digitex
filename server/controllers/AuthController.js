@@ -46,7 +46,6 @@ export const Signup = async (req, res, next) => {
       shippingAddress,
     });
 
-    console.log(user);
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
       withCredentials: true,

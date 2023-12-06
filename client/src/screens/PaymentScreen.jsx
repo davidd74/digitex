@@ -11,8 +11,6 @@ const PaymentScreen = () => {
   const cart = useSelector((state) => state.cart.cartItems);
   const navigate = useNavigate();
 
-  console.log(!user.shippingAddress._id);
-
   useEffect(() => {
     if (user.shippingAddress._id) {
       navigate("/checkout/address");

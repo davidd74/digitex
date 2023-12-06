@@ -30,8 +30,6 @@ const corsOptions = {
   credentials: true,
 };
 
-// console.log(nanoid());
-
 app.use(cors(corsOptions));
 
 app.use(cookieParser());
