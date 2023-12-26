@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 
 const useCookieVerification = (typeofRoute) => {
   const [isAuthorized, setIsAuthorized] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
 
   useEffect(() => {
@@ -15,13 +14,12 @@ const useCookieVerification = (typeofRoute) => {
           { withCredentials: true },
         );
 
-        const { status, isAdmin } = data;
+        const { status } = data;
 
         if (!status) {
           setIsAuthorized(false);
         } else {
           setIsAuthorized(true);
-          setIsAdmin(isAdmin);
         }
       } catch (error) {
         console.error("Error verifying cookie:", error);
@@ -34,7 +32,7 @@ const useCookieVerification = (typeofRoute) => {
     verifyCookie();
   }, [typeofRoute]);
 
-  return { isAuthorized, isVerified, isAdmin };
+  return { isAuthorized, isVerified };
 };
 
 export default useCookieVerification;

@@ -36,7 +36,6 @@ const SignupScreen = () => {
     const errors = validateForm();
 
     if (Object.keys(errors).length !== 0) {
-      // Display validation errors with toast or handle them as needed
       Object.values(errors).forEach((error) => {
         toast.error(error, {});
       });

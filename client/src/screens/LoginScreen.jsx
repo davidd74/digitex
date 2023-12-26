@@ -109,6 +109,7 @@ const LoginScreen = () => {
                   value={formData.email}
                   name="email"
                   onChange={handleInputChange}
+                  autoComplete={false}
                   icon={
                     <MdMail
                       fontSize={"1.5rem"}
@@ -123,6 +124,7 @@ const LoginScreen = () => {
                   type="password"
                   name="password"
                   value={formData.password}
+                  autoComplete={false}
                   onChange={handleInputChange}
                   id="filled-password-input"
                 />

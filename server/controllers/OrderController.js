@@ -74,7 +74,6 @@ export const getOrder = async (req, res) => {
 // Use the pagination middleware function in your controller
 export const getUserOrders = async (req, res) => {
   try {
-    // Extract the token from the request cookies
     const token = req.cookies.token;
 
     if (!token) {
@@ -82,13 +81,14 @@ export const getUserOrders = async (req, res) => {
       return;
     }
 
+    const page = req.params.page ? parseInt(req.params.page) : 1;
+    const limit = req.params.limit ? parseInt(req.params.limit) : 1;
+
     const data = jwt.verify(token, process.env.TOKEN_KEY);
-
     const userId = data.id;
-
     const filter = { user: userId };
 
-    await Pagination(Order, filter)(req, res);
+    await Pagination(Order, filter, page, limit)(req, res);
 
     res.status(200).json(res.paginatedData);
   } catch (error) {

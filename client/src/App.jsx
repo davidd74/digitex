@@ -12,18 +12,10 @@ import {
   ReviewScreen,
 } from "./screens";
 
-import {
-  AdminOrderDetailsScreen,
-  AdminOrdersScreen,
-  AdminProductDetailsScreen,
-  AdminProductsScreen,
-} from "./screens/AdminScreens";
-
 import Navbar from "./components/Navbar";
 import CheckoutRoute from "./routes/CheckoutRoute";
 import OrderRoutes from "./routes/OrderRoutes";
 import PrivateRoutes from "./routes/PrivateRoute";
-import AdminRoutes from "./routes/AdminRoutes";
 
 const App = () => {
   const location = useLocation();
@@ -42,13 +34,6 @@ const App = () => {
         <Route path="/*" element={<PrivateRoutes />}>
           <Route path="product/:id/review" element={<ReviewScreen />} />
           <Route path="account/*" element={<UserProfileScreen />} />
-        </Route>
-
-        <Route path="/admin/*" element={<AdminRoutes />}>
-          <Route path="orders" element={<AdminOrdersScreen />} />
-          <Route path="orders/:id" element={<AdminOrderDetailsScreen />} />
-          <Route path="products" element={<AdminProductsScreen />} />
-          <Route path="products/:id" element={<AdminProductDetailsScreen />} />
         </Route>
 
         <Route path="/checkout/*" element={<CheckoutRoute />}>

@@ -18,7 +18,7 @@ export const setUserAddress = async (req, res) => {
         country,
       };
       const updatedUser = await user.save();
-      res.status(200).json(updatedUser);
+      res.status(200).json({ updatedUser, success: "true" });
     } else {
       res.status(404).json({ message: "User not found" });
     }
@@ -28,10 +28,11 @@ export const setUserAddress = async (req, res) => {
 };
 
 export const updateUserDetails = async (req, res) => {
-  const { email, firstName, lastName, password, currentEmail } = req.body;
+  const { firstName, lastName, password, email, currentEmail } = req.body;
+  console.log("got credentials");
 
   try {
-    const user = await User.findOne({ currentEmail });
+    const user = await User.findOne({ email: currentEmail });
     if (user) {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
@@ -41,7 +42,7 @@ export const updateUserDetails = async (req, res) => {
       user.password = hashedPassword;
 
       const updatedUser = await user.save();
-      res.status(200).json(updatedUser);
+      res.status(200).json({ updatedUser, success: "true" });
     } else {
       res.status(404).json({ message: "User not found" });
     }

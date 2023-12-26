@@ -60,20 +60,19 @@ export const decrementProductQuantity = async (req, res) => {
 export const postProductReview = async (req, res) => {
   try {
     const { rating, reviewTitle, reviewDescription, productId } = req.body;
+    console.log("Request Body:", req.body);
 
-    // Extract the token from the request cookies
     const token = req.cookies.token;
-
-    // Verify the token and extract the user data
     const data = jwt.verify(token, process.env.TOKEN_KEY);
-
-    // Get the user ID from the token data
     const userId = data.id;
+    console.log("User ID:", userId);
 
     const existingReview = await Review.findOne({
       user: userId,
       productId: productId,
     });
+    console.log("check for existingReview");
+
     if (existingReview) {
       return res.status(200).json({
         message: "You have already reviewed this product",
@@ -88,6 +87,8 @@ export const postProductReview = async (req, res) => {
       reviewDescription: reviewDescription,
       productId: productId,
     });
+
+    console.log("Review created:", postReview);
 
     const product = await Product.findById(productId);
     const user = await User.findById(userId);

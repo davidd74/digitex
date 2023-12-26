@@ -1,9 +1,14 @@
-export const Pagination = (model, filter) => {
+export const Pagination = (
+  model,
+  filter,
+  defaultPage = 1,
+  defaultLimit = 5
+) => {
   return async (req, res, next) => {
     try {
-      const page = parseInt(req.query.page) || 1;
+      const page = parseInt(req.query.page) || defaultPage;
 
-      const limit = parseInt(req.query.limit) || 5;
+      const limit = parseInt(req.query.limit) || defaultLimit;
 
       const skip = (page - 1) * limit;
 

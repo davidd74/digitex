@@ -24,7 +24,8 @@
     "react-icons": "^4.10.1",
     "react-paypal-button-v3": "^3.0.2",
     "react-redux": "^8.1.2",
-    "react-router-dom": "^6.14.2"
+    "react-router-dom": "^6.14.2",
+    "react-spinners": "^0.13.8"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

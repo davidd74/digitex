@@ -75,7 +75,6 @@ DropdownMenu.propTypes = {
   onClose: PropTypes.func,
   user: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   isAuthorized: PropTypes.bool,
-  isAdmin: PropTypes.bool,
 };
 
 export default DropdownMenu;

@@ -5,13 +5,11 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import DropdownMenu from "./DropdownMenu";
-import DropdownAdminMenu from "../components/Admin/DropdownAdminMenu";
 import useCookieVerification from "../hooks/useCookieVerification";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [userAnchorEl, setUserAnchorEl] = useState(null);
-  const [adminAnchorEl, setAdminAnchorEl] = useState(null);
 
   const user = useSelector((state) => state.user.userData);
   const cart = useSelector((state) => state.cart.cartItems);
@@ -34,7 +32,7 @@ const Navbar = () => {
     setAnchor(null);
   };
 
-  const { isAuthorized, isAdmin } = useCookieVerification("private");
+  const { isAuthorized } = useCookieVerification("private");
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -93,30 +91,9 @@ const Navbar = () => {
               open={Boolean(userAnchorEl)}
               onClose={() => handleCloseMenu(setUserAnchorEl)}
               user={user}
-              isAdmin={user?.isAdmin}
               isAuthorized={isAuthorized}
             />
           </li>
-          {isAdmin && (
-            <li>
-              <>
-                <div
-                  className="flex items-center gap-2"
-                  onClick={(event) =>
-                    handleDropdownClick(event, setAdminAnchorEl)
-                  }
-                >
-                  <FaUserCircle className="text-xl" /> <p>Admin</p>{" "}
-                </div>
-                <DropdownAdminMenu
-                  anchorEl={adminAnchorEl}
-                  open={Boolean(adminAnchorEl)}
-                  onClose={() => handleCloseMenu(setAdminAnchorEl)}
-                  isAuthorized={isAuthorized}
-                />
-              </>
-            </li>
-          )}
         </ul>
 
         <button

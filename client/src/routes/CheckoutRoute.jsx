@@ -2,6 +2,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import useCookieVerification from "../hooks/useCookieVerification";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import SyncLoader from "react-spinners/SyncLoader";
 
 const CheckoutRoute = () => {
   const { isAuthorized, isVerified } = useCookieVerification("private");
@@ -29,7 +30,11 @@ const CheckoutRoute = () => {
   }, [isAuthorized, isVerified, navigate, step, cart]);
 
   if (isLoading) {
-    return <div>Loading...</div>; // Show a loading state while verifying
+    return (
+      <div>
+        <SyncLoader color="#58B1FF" />
+      </div>
+    );
   }
 
   return <Outlet />;
