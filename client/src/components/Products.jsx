@@ -11,16 +11,13 @@ const Products = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true); // Set loading to true when new data is fetched
+    setLoading(true); 
     if (data && data.length > 0) {
-      // Track the number of images that are still loading
       let imagesToLoad = data.length;
 
-      // Function to handle image load
       const handleImageLoad = () => {
         imagesToLoad--;
         if (imagesToLoad === 0) {
-          // All images loaded, loading false
           setLoading(false);
         }
       };
