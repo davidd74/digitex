@@ -7,42 +7,50 @@ import toast from "react-hot-toast";
 import RatingFormula from "./RatingFormula";
 
 const Products = () => {
-  const { data, isLoading, error } = useGetProductsQuery();
-  const [loading, setLoading] = useState(true);
+  // const { data, isLoading, error } = useGetProductsQuery();
+  const [loading, setLoading] = useState(false);
 
-  console.log(data);
+  const data = [
+    {
+      price: 100,
+      brand: "Adidas",
+      image: {
+        url: "https://dummyimage.com/300x300/000/fff",
+      },
+    },
+  ];
 
-  useEffect(() => {
-    setLoading(true);
-    if (data && data.length > 0) {
-      let imagesToLoad = data.length;
+  // useEffect(() => {
+  //   setLoading(true);
+  //   if (data && data.length > 0) {
+  //     let imagesToLoad = data.length;
 
-      const handleImageLoad = () => {
-        imagesToLoad--;
-        if (imagesToLoad === 0) {
-          setLoading(false);
-        }
-      };
+  //     const handleImageLoad = () => {
+  //       imagesToLoad--;
+  //       if (imagesToLoad === 0) {
+  //         setLoading(false);
+  //       }
+  //     };
 
-      data.forEach((product) => {
-        const imageElement = new Image();
-        imageElement.src = product.image.url;
-        imageElement.addEventListener("load", handleImageLoad);
+  //     data.forEach((product) => {
+  //       const imageElement = new Image();
+  //       imageElement.src = product.image.url;
+  //       imageElement.addEventListener("load", handleImageLoad);
 
-        return () => {
-          imageElement.removeEventListener("load", handleImageLoad);
-        };
-      });
-    }
-  }, [data]);
+  //       return () => {
+  //         imageElement.removeEventListener("load", handleImageLoad);
+  //       };
+  //     });
+  //   }
+  // }, [data]);
 
-  if (error) {
-    toast.error(error);
-  }
+  // if (error) {
+  //   toast.error(error);
+  // }
 
   return (
     <div>
-      {isLoading || loading ? (
+      {loading ? (
         <div className="flex items-center justify-center h-screen">
           <SyncLoader color="#58B1FF" />
         </div>
@@ -50,14 +58,15 @@ const Products = () => {
         <div>
           <Grid container spacing={2.5} marginTop={"3.5rem"}>
             {data &&
-              data?.map((product) => {
-                const averageRating = product.reviews.reduce(
-                  (acc, review) => acc + review.rating,
-                  0,
-                );
+              data?.map((product, index) => {
+                // const averageRating = product.reviews.reduce(
+                //   (acc, review) => acc + review.rating,
+                //   0,
+                // );
+                const averageRating = 3.5;
 
                 return (
-                  <Grid item xs={6} md={3} lg={2} key={product._id}>
+                  <Grid item xs={6} md={3} lg={2} key={index}>
                     <Card
                       sx={{
                         bgcolor: "#1E1E1E",
