@@ -10,6 +10,8 @@ const Products = () => {
   const { data, isLoading, error } = useGetProductsQuery();
   const [loading, setLoading] = useState(true);
 
+  console.log(data);
+
   useEffect(() => {
     setLoading(true);
     if (data && data.length > 0) {
@@ -27,7 +29,6 @@ const Products = () => {
         imageElement.src = product.image.url;
         imageElement.addEventListener("load", handleImageLoad);
 
-        // Cleanup function to remove event listener when component unmounts
         return () => {
           imageElement.removeEventListener("load", handleImageLoad);
         };
