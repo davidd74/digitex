@@ -7,10 +7,13 @@ import toast from "react-hot-toast";
 import RatingFormula from "./RatingFormula";
 
 const Products = () => {
-  // const { data, isLoading, error } = useGetProductsQuery();
+  const { data, isLoading, error } = useGetProductsQuery();
+  if (data) {
+    console.log(data);
+  }
   const [loading, setLoading] = useState(false);
 
-  const data = [
+  const productData = [
     {
       price: 100,
       brand: "Adidas",
@@ -59,11 +62,16 @@ const Products = () => {
           <Grid container spacing={2.5} marginTop={"3.5rem"}>
             {data &&
               data?.map((product, index) => {
-                // const averageRating = product.reviews.reduce(
-                //   (acc, review) => acc + review.rating,
-                //   0,
-                // );
-                const averageRating = 3.5;
+                console.log("Product image URL:", product.image.url);
+                console.log("Product reviews:", product.reviews);
+
+                const averageRating =
+                  product.reviews.length > 0
+                    ? product.reviews.reduce(
+                        (acc, review) => acc + review.rating,
+                        0,
+                      ) / product.reviews.length
+                    : 0;
 
                 return (
                   <Grid item xs={6} md={3} lg={2} key={index}>
