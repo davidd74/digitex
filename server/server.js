@@ -25,16 +25,15 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
+app.get("/", (req, res) => {
+  res.send("Digitex Server");
+});
+
 const corsOptions = {
-  origin: ["http://localhost:5173"],
+  origin: ["http://192.168.8.103:5173", "http://localhost:5173"],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 };
-
-// const new_password = "david";
-// const salt = await bcrypt.genSalt(10);
-// const hashedPw = await bcrypt.hash(new_password, salt);
-// console.log(hashedPw);
 
 app.use(cors(corsOptions));
 

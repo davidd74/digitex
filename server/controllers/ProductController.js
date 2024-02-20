@@ -8,7 +8,11 @@ const User = UserModel.User;
 
 export const getProducts = async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().populate({
+      path: "reviews",
+      select: "rating",
+    });
+
     res.status(200).json(products);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -75,7 +79,7 @@ export const postProductReview = async (req, res) => {
 
     if (existingReview) {
       return res.status(200).json({
-        message: "You have already reviewed this product",
+        message: "You already reviewed this product",
         success: false,
       });
     }

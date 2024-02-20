@@ -93,7 +93,7 @@ const AddressScreen = () => {
             minHeight: "100vh",
           }}
         >
-          <h1 className="mt-[200px] pb-8 text-3xl leading-snug lg:text-4xl">
+          <h1 className="xs:mt-[120px] md:mt-[200px] pb-8 text-3xl leading-snug lg:text-4xl">
             Shipping address
           </h1>
           <form

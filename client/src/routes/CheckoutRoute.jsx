@@ -3,10 +3,12 @@ import useCookieVerification from "../hooks/useCookieVerification";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import SyncLoader from "react-spinners/SyncLoader";
+import Cookies from "js-cookie";
 
 const CheckoutRoute = () => {
   const { isAuthorized, isVerified } = useCookieVerification("private");
   const cart = useSelector((state) => state.cart.cartItems);
+  const token = Cookies.get("token");
   const step = useSelector((state) => state.checkout.step);
 
   const navigate = useNavigate();
@@ -15,7 +17,9 @@ const CheckoutRoute = () => {
   useEffect(() => {
     if (isVerified) {
       setIsLoading(false);
-      if (!isAuthorized) {
+      if (!isAuthorized && !token) {
+        const currentPath = window.location.pathname;
+        sessionStorage.setItem("from", currentPath);
         navigate("/login");
       }
     }
@@ -27,7 +31,7 @@ const CheckoutRoute = () => {
     if (step === window.location.pathname) {
       navigate(step);
     }
-  }, [isAuthorized, isVerified, navigate, step, cart]);
+  }, [isAuthorized, isVerified, step, cart]);
 
   if (isLoading) {
     return (

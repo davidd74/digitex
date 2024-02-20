@@ -22,7 +22,7 @@ const App = () => {
   const hideNavbar = ["/login", "/signup"].includes(location.pathname);
 
   return (
-    <>
+    <div className="">
       {!hideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<HomeScreen />} />
@@ -48,7 +48,7 @@ const App = () => {
           />
         </Route>
       </Routes>
-    </>
+    </div>
   );
 };
 

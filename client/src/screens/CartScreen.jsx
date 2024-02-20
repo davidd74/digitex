@@ -37,7 +37,7 @@ const CartScreen = () => {
   return (
     <Container
       style={{
-        paddingTop: "200px",
+        paddingTop: "135px",
       }}
     >
       <div className="flex items-center justify-between p-2">

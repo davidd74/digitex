@@ -9,18 +9,25 @@ import { setStep } from "../slices/checkoutSlice";
 import { useUpdateCountInStockMutation } from "../slices/productsApiSlice";
 import { useCreateOrderMutation } from "../slices/orderApiSlice";
 import SyncLoader from "react-spinners/SyncLoader";
+import Button from "./Button";
 
 const CartSummary = ({ onClickFunction, totalPrice, buttonCta }) => {
-  const length = useSelector((state) => state.cart.cartItems.length);
+  const cartLength = useSelector((state) => state.cart.cartItems.length);
   const checkoutStep = useSelector((state) => state.checkout.step);
   const userData = useSelector((state) => state.user.userData);
   const cart = useSelector((state) => state.cart.cartItems);
+  const userId = useSelector((state) => state.user.userData._id);
+  const shippingAddress = useSelector(
+    (state) => state.user.userData.shippingAddress,
+  );
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [updateCountInStock, { isLoading }] = useUpdateCountInStockMutation();
   const [postOrder, { isLoading: isCreatingOrder }] = useCreateOrderMutation();
 
+  // paypal config
   const createOrder = (data, actions) => {
     return actions.order.create({
       purchase_units: [
@@ -32,11 +39,6 @@ const CartSummary = ({ onClickFunction, totalPrice, buttonCta }) => {
       ],
     });
   };
-
-  const userId = useSelector((state) => state.user.userData._id);
-  const shippingAddress = useSelector(
-    (state) => state.user.userData.shippingAddress,
-  );
 
   const onApprove = async () => {
     try {
@@ -83,7 +85,7 @@ const CartSummary = ({ onClickFunction, totalPrice, buttonCta }) => {
         </div>
       ) : (
         <div
-          className={`flex flex-col gap-5 rounded-sm bg-secondary-500  px-6 py-5 shadow-md`}
+          className={`flex flex-col gap-5 rounded-sm bg-secondary-500  px-3 py-5 shadow-md`}
         >
           <h2 className="font-medium xs:text-xl md:text-3xl">
             Pricing Summary
@@ -162,13 +164,11 @@ const CartSummary = ({ onClickFunction, totalPrice, buttonCta }) => {
             </>
           ) : (
             <Link to="/checkout/address">
-              <button
-                className="text-md transition-bg md:text-md mt-2 rounded-lg bg-primary-600 px-2 py-3 font-medium duration-300 hover:bg-primary-700 xs:w-full xs:text-sm md:w-1/3 lg:w-full"
-                disabled={length === 0}
+              <Button
+                disabled={cartLength === 0}
+                text={buttonCta}
                 onClick={onClickFunction}
-              >
-                {buttonCta}
-              </button>
+              />
             </Link>
           )}
 

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { logoutUser } from "../slices/userSlice";
 import { useDispatch } from "react-redux";
-import menuItemStyle from "../utils/getDropDownMenuItemStytyle";
+import menuItemStyle from "../utils/getDropDownMenuItemStyle";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 

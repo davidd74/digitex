@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -29,10 +29,15 @@ const ProductScreen = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const { data, isLoading } = useGetProductDetailsQuery(id);
+  const { data, isLoading, refetch } = useGetProductDetailsQuery(id, {
+    refetchOnMountOrArgChange: true,
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   const reviews = data?.reviews || [];
-  console.log(data);
   const totalReviews = reviews.length;
   const ratings = Array(5).fill(0);
 
@@ -113,7 +118,7 @@ const ProductScreen = () => {
 
               <Grid item xs={12} md={6}>
                 <div className="xs:mt-8 md:mt-0 md:px-5 md:py-2 lg:px-10 lg:py-4">
-                  <p className="mb- text-md transition-text cursor-pointer font-medium text-gray-400 duration-200 hover:text-gray-200">
+                  <p className="text-md transition-text cursor-pointer font-medium text-gray-400 duration-200 hover:text-gray-200">
                     {data.brand}
                   </p>
                   <h1 className="xs:text-3xl md:text-3xl lg:text-4xl">
@@ -140,7 +145,7 @@ const ProductScreen = () => {
                     <button
                       className={`flex items-center gap-2 rounded-2xl px-4 font-medium xs:w-2/3 xs:py-3 ms:w-1/2 sm:w-1/3 md:w-1/2 lg:py-4 xl:w-1/3 ${
                         isProductOutOfStock
-                          ? "cursor-not-allowed bg-red-400"
+                          ? "cursor-not-allowed bg-red-500"
                           : "bg-primary-600 hover:bg-primary-700"
                       } transition-background duration-300`}
                       onClick={addToCartHandler}
@@ -159,7 +164,7 @@ const ProductScreen = () => {
                       />
                     </div>
                   </div>
-                  <div className="mt-5 flex items-center gap-2 text-lg text-red-600">
+                  <div className="mt-5 flex items-center gap-2 text-lg text-red-500">
                     {isProductOutOfStock ? (
                       <div className="flex items-center gap-2">
                         <MdCancel className="text-2xl font-semibold" />
@@ -248,51 +253,57 @@ const ProductScreen = () => {
                 </div>
               </Grid>
 
-              <Grid item xs={12} md={8}>
-                <div className="flex flex-col gap-8 xs:mt-6 xs:px-0 md:mt-0 md:px-6">
-                  {reviews.map((review) => (
-                    <div
-                      key={review._id}
-                      className="rounded-md bg-secondary-500 p-6 shadow-sm"
-                    >
-                      <p className="flex items-center gap-2 text-xl">
-                        <BiSolidUserCircle className="text-3xl" />
-                        {review.user?.firstName}
-                      </p>
+              {totalReviews > 0 ? (
+                <Grid item xs={12} md={8}>
+                  <div className="flex flex-col gap-8 xs:mt-6 xs:px-0 md:mt-0 md:px-6">
+                    {reviews.map((review) => (
                       <div
                         key={review._id}
-                        className="mt-3 flex gap-2 text-lg xs:flex-col-reverse md:flex-row md:items-center"
+                        className="rounded-md bg-secondary-500 p-6 shadow-sm"
                       >
-                        <RatingFormula rating={review.rating} />
-                        <p className="font-medium">{review.reviewTitle}</p>
-                      </div>
-
-                      <div className="mt-2 font-light">
-                        {expandedTexts[review._id] ||
-                        review.reviewDescription?.length <=
-                          MINIMUM_REVIEW_LENGTH
-                          ? review.reviewDescription
-                          : `${review.reviewDescription?.substring(
-                              0,
-                              MINIMUM_REVIEW_LENGTH,
-                            )}...`}
-                      </div>
-
-                      {review.reviewDescription.length >
-                        MINIMUM_REVIEW_LENGTH && (
-                        <button
-                          className="mt-2 text-sm text-primary-400 transition-colors duration-200 hover:text-primary-600 hover:underline"
-                          onClick={() => readMoreHandler(review._id)}
+                        <p className="flex items-center gap-2 text-xl">
+                          <BiSolidUserCircle className="text-3xl" />
+                          {review.user?.firstName}
+                        </p>
+                        <div
+                          key={review._id}
+                          className="mt-3 flex gap-2 text-lg md:items-center"
                         >
-                          {expandedTexts[review._id]
-                            ? "Show Less"
-                            : "Read More"}
-                        </button>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </Grid>
+                          <RatingFormula rating={review.rating} />
+                          <p className="font-medium">{review.reviewTitle}</p>
+                        </div>
+
+                        <div className="mt-2 font-light">
+                          {expandedTexts[review._id] ||
+                          review.reviewDescription?.length <=
+                            MINIMUM_REVIEW_LENGTH
+                            ? review.reviewDescription
+                            : `${review.reviewDescription?.substring(
+                                0,
+                                MINIMUM_REVIEW_LENGTH,
+                              )}...`}
+                        </div>
+
+                        {review.reviewDescription.length >
+                          MINIMUM_REVIEW_LENGTH && (
+                          <button
+                            className="mt-2 text-sm text-primary-400 transition-colors duration-200 hover:text-primary-600 hover:underline"
+                            onClick={() => readMoreHandler(review._id)}
+                          >
+                            {expandedTexts[review._id]
+                              ? "Show Less"
+                              : "Read More"}
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </Grid>
+              ) : (
+                <Grid item xs={12} md={8}>
+                  <p className="text-center mt-4 text-gray-400">There are no reviews.</p>
+                </Grid>
+              )}
             </Grid>
           </Container>
         </div>

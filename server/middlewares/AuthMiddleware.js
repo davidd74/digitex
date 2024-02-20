@@ -4,8 +4,6 @@ import UserModel from "../models/UserModel.js";
 const User = UserModel.User;
 import jwt from "jsonwebtoken";
 
-// verify if the user   logged in the homepage of the server
-
 export const userVerification = async (req, res, next) => {
   const token = req.cookies.token;
 
@@ -18,6 +16,7 @@ export const userVerification = async (req, res, next) => {
       return res.json({ status: false });
     } else {
       const user = await User.findById(data.id);
+      console.log(user);
       if (user) {
         const isAdmin = user.isAdmin;
 

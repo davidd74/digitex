@@ -1,12 +1,12 @@
-import InputField from "../components/InputField";
-
-import { useFormValidation } from "../hooks/useFormValidation";
-import { validateUpdateUserDetails } from "../utils/validate";
-import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserDetails } from "../slices/userSlice";
-import { useUpdateUserDetailsMutation } from "../slices/userApiSlice";
+import toast from "react-hot-toast";
 import SyncLoader from "react-spinners/SyncLoader";
+import InputField from "../components/InputField";
+import { useFormValidation } from "../hooks/useFormValidation";
+import { useUpdateUserDetailsMutation } from "../slices/userApiSlice";
+import { validateUpdateUserDetails } from "../utils/validate";
+import { updateUserDetails } from "../slices/userSlice";
+import Button from "./Button";
 
 const AccountDetails = () => {
   const email = useSelector((state) => state.user.userData.email);
@@ -56,14 +56,11 @@ const AccountDetails = () => {
             email: formData.email,
           }),
         );
+        toast.success("Details updated", {});
       }
 
       formData.password = "";
       formData.confirmPassword = "";
-
-      if (response.status === 200) {
-        toast.success("Details updated", {});
-      }
     } catch (error) {
       console.error(error);
       toast.error("An error occured, please try again", {});
@@ -73,10 +70,13 @@ const AccountDetails = () => {
   return (
     <>
       {isLoading ? (
-        <SyncLoader color="#58B1FF" />
+        <div className="flex h-full items-center justify-center">
+          <SyncLoader color="#58B1FF" />
+        </div>
       ) : (
         <div>
           <form className="flex flex-col gap-4" onSubmit={updateUser}>
+            <h1 className="pb-2 text-xl font-semibold">Account details</h1>
             <InputField
               label="First name"
               type="text"
@@ -122,13 +122,9 @@ const AccountDetails = () => {
               onChange={handleInputChange}
               error={!!formErrors.confirmPassword}
             />
-            <button
-              className="text-medium w-full rounded-2xl bg-primary-600 p-1 py-3 transition-all duration-200
-        ease-linear hover:bg-primary-700 md:w-1/3 xl:w-1/4
-        "
-            >
-              Update
-            </button>
+            <div className="sm:w-1/3 xl:w-1/4 pt-2">
+              <Button text={"Update"} type="submit" onClick={updateUser} />
+            </div>
           </form>
         </div>
       )}

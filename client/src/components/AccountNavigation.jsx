@@ -1,8 +1,9 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
-import { logoutUser } from "../slices/userSlice";
-import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../slices/userSlice";
+import Button from "./Button";
 
 const AccountNavigation = () => {
   const navigate = useNavigate();
@@ -29,7 +30,11 @@ const AccountNavigation = () => {
         <Link to="/account/orders">My orders</Link>
       </div>
       <div className="bg-secondary-500 p-4">
-        <button onClick={logout}>Log out</button>
+        <Button
+          onClick={logout}
+          className={"!w-auto !bg-secondary-500 !py-0"}
+          text={"Logout"}
+        />
       </div>
     </div>
   );

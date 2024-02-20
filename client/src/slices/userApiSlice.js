@@ -19,8 +19,30 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    signUp: builder.mutation({
+      query: (data) => ({
+        url: `${BASE_URL}/signup`,
+        method: "POST",
+        credentials: "include",
+        body: data,
+      }),
+      invalidatesTags: ["User"],
+    }),
+    login: builder.mutation({
+      query: (data) => ({
+        url: `${BASE_URL}/login`,
+        method: "POST",
+        credentials: "include",
+        body: data,
+      }),
+      invalidatesTags: ["User"],
+    }),
   }),
 });
 
-export const { useUpdateUserDetailsMutation, useSetUserAddressMutation } =
-  userApiSlice;
+export const {
+  useUpdateUserDetailsMutation,
+  useSetUserAddressMutation,
+  useSignUpMutation,
+  useLoginMutation,
+} = userApiSlice;

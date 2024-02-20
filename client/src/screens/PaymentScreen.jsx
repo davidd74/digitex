@@ -23,7 +23,7 @@ const PaymentScreen = () => {
         minHeight: "100vh",
       }}
     >
-      <div className="mt-[200px]">
+      <div className="xs:mt-[120px] md:mt-[200px]">
         <div>
           <h1 className="pb-8 text-center font-medium xs:text-3xl md:text-4xl">
             Checkout
@@ -34,7 +34,7 @@ const PaymentScreen = () => {
           <Grid item xs={12} lg={9}>
             <div>
               <div className="mb-6 flex justify-between bg-secondary-500 px-4 py-3 font-medium shadow-sm">
-                <div className="w-1/3">Product Name</div>
+                <div className="w-1/3">Name</div>
                 <div className="w-1/3">Quantity</div>
                 <div className="w-1/3">Price</div>
               </div>

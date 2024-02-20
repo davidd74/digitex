@@ -1,5 +1,5 @@
 import Container from "./Container";
-import logo from "../assets/logo.svg";
+import DIGITEX from "../assets/DIGITEX.svg";
 import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -57,10 +57,10 @@ const Navbar = () => {
         }}
       >
         <Link to="/">
-          <img src={logo} alt="Digitex logo" className="w-[160px]" />
+          <img src={DIGITEX} alt="Digitex logo" className="w-[140px]" />
         </Link>
         {/* desktop UL Navbar */}
-        <ul className="hidden gap-8 text-lg md:flex">
+        <ul className="items-center hidden gap-8 text-lg md:flex">
           <li>
             <Link className="flex items-center gap-2" to="cart">
               <div>
@@ -133,13 +133,20 @@ const Navbar = () => {
           } bg-[#171717] md:hidden`}
         >
           <li>
-            <Link
-              className="flex items-center gap-4"
-              to="/cart"
-              onClick={toggleNavbar}
-            >
-              <FaShoppingCart className="text-2xl" />
-              <p className="text-xl">Cart</p>
+            <Link className="flex items-center gap-2" to="cart">
+              <div>
+                <FaShoppingCart className="text-2xl" />
+              </div>
+              <p className="text-lg">Cart</p>
+              <div
+                className={`${
+                  cart.length
+                    ? "flex h-6 w-6 items-center justify-center rounded-full bg-primary-600 px-3 py-3 text-sm font-semibold"
+                    : "hidden"
+                }`}
+              >
+                <span>{cart.length > 0 ? cart.length : ""}</span>
+              </div>
             </Link>
           </li>
           <li>
