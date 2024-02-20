@@ -8,23 +8,29 @@ import RatingFormula from "./RatingFormula";
 
 const Products = () => {
   const { data, isLoading, error } = useGetProductsQuery();
+  console.log(data);
+
+  const [loading, setLoading] = useState(false);
   if (data) {
     console.log(data);
   }
-  const [loading, setLoading] = useState(false);
+  console.log("is loading");
+  console.log(isLoading);
 
-  const productData = [
-    {
-      price: 100,
-      brand: "Adidas",
-      image: {
-        url: "https://dummyimage.com/300x300/000/fff",
-      },
-    },
-  ];
+  console.log("loading");
+  console.log(loading);
+
+  // const productData = [
+  //   {
+  //     price: 100,
+  //     brand: "Adidas",
+  //     image: {
+  //       url: "https://dummyimage.com/300x300/000/fff",
+  //     },
+  //   },
+  // ];
 
   // useEffect(() => {
-  //   setLoading(true);
   //   if (data && data.length > 0) {
   //     let imagesToLoad = data.length;
 
@@ -47,13 +53,13 @@ const Products = () => {
   //   }
   // }, [data]);
 
-  // if (error) {
-  //   toast.error(error);
-  // }
+  if (error) {
+    toast.error(error);
+  }
 
   return (
     <div>
-      {loading ? (
+      {loading || isLoading ? (
         <div className="flex items-center justify-center h-screen">
           <SyncLoader color="#58B1FF" />
         </div>
