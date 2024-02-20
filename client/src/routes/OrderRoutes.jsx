@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import useCookieVerification from "../hooks/useCookieVerification";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { BASE_URL } from "../utils/constants";
 
 const OrderRoutes = () => {
   const { id } = useParams();
@@ -15,11 +16,7 @@ const OrderRoutes = () => {
     }
 
     axios
-      .post(
-        "http://localhost:5000/orderauth",
-        { id },
-        { withCredentials: true },
-      )
+      .post(`http://${BASE_URL}/orderauth`, { id }, { withCredentials: true })
       .then((response) => {
         if (response.data.status === false) {
           toast.error("You do not have permission to access this order.");

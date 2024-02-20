@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
@@ -11,7 +10,7 @@ import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { Toaster } from "react-hot-toast";
 
 const rootElement = document.getElementById("root");
-rootElement.className = "text-slate-100 min-h-full";
+rootElement.className = "min-h-full text-slate-100";
 
 const paypalClientId = import.meta.env.VITE_PAYPAL_CLIENT_ID;
 
@@ -23,16 +22,14 @@ const paypalOptions = {
 };
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <PayPalScriptProvider options={paypalOptions}>
-          <BrowserRouter>
-            <App />
-            <Toaster position="top-right" />
-          </BrowserRouter>
-        </PayPalScriptProvider>
-      </ThemeProvider>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <PayPalScriptProvider options={paypalOptions}>
+        <BrowserRouter>
+          <App />
+          <Toaster position="top-right" />
+        </BrowserRouter>
+      </PayPalScriptProvider>
+    </ThemeProvider>
+  </Provider>,
 );

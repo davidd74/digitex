@@ -27,7 +27,7 @@ const HomeScreen = () => {
   return (
     <Container>
       <div className="mt-[150px] w-full px-2.5">
-        {/* <Slider {...settings}>
+        <Slider {...settings}>
           <div
             className="bg-start w-full rounded-[0.65rem] bg-samsung_banner bg-cover bg-no-repeat xs:h-[225px] sm:h-[300px] md:h-[350px] lg:h-[500px]  xl:bg-center 2xl:h-[530px]"
             onClick={() => navigate(`/product/64d4b10c0fdb05e93626b4b2`)}
@@ -40,7 +40,7 @@ const HomeScreen = () => {
             className="bg-start h-[225px] w-full rounded-[0.65rem] bg-xiaomi_banner bg-cover bg-no-repeat sm:h-[300px] md:h-[350px] lg:h-[500px]  xl:bg-center 2xl:h-[530px]"
             onClick={() => navigate(`/product/658c8bd97f5374a178cdf460`)}
           ></div>
-        </Slider> */}
+        </Slider>
       </div>
       <Products />
     </Container>

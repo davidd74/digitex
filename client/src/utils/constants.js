@@ -1,5 +1,5 @@
 // export const BASE_URL = "http://192.168.8.103:5000";
-export const production = false;
+export const production = true;
 
 export const BASE_URL = production
   ? "https://digitex-server.vercel.app"

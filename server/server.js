@@ -35,7 +35,7 @@ const corsOptions = {
   origin: [
     "http://192.168.8.103:5173",
     "http://localhost:5173",
-    "https://digitex-server.vercel.app",
+    "https://digitex.vercel.app",
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
