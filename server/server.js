@@ -26,9 +26,7 @@ app.listen(PORT, () => {
 });
 
 app.get("/", (req, res) => {
-  res.json({
-    message: "Digitex server",
-  });
+  res.send("Digitex Server");
 });
 
 const corsOptions = {
