@@ -30,28 +30,28 @@ const Products = () => {
   //   },
   // ];
 
-  // useEffect(() => {
-  //   if (data && data.length > 0) {
-  //     let imagesToLoad = data.length;
+  useEffect(() => {
+    if (data && data.length > 0) {
+      let imagesToLoad = data.length;
 
-  //     const handleImageLoad = () => {
-  //       imagesToLoad--;
-  //       if (imagesToLoad === 0) {
-  //         setLoading(false);
-  //       }
-  //     };
+      const handleImageLoad = () => {
+        imagesToLoad--;
+        if (imagesToLoad === 0) {
+          setLoading(false);
+        }
+      };
 
-  //     data.forEach((product) => {
-  //       const imageElement = new Image();
-  //       imageElement.src = product.image.url;
-  //       imageElement.addEventListener("load", handleImageLoad);
+      data.forEach((product) => {
+        const imageElement = new Image();
+        imageElement.src = product.image.url;
+        imageElement.addEventListener("load", handleImageLoad);
 
-  //       return () => {
-  //         imageElement.removeEventListener("load", handleImageLoad);
-  //       };
-  //     });
-  //   }
-  // }, [data]);
+        return () => {
+          imageElement.removeEventListener("load", handleImageLoad);
+        };
+      });
+    }
+  }, [data]);
 
   if (error) {
     toast.error(error);
@@ -70,14 +70,14 @@ const Products = () => {
               data?.map((product, index) => {
                 console.log("Product image URL:", product.image.url);
                 console.log("Product reviews:", product.reviews);
+                const totalReviews = product.reviews.length;
 
-                const averageRating =
-                  product.reviews.length > 0
-                    ? product.reviews.reduce(
-                        (acc, review) => acc + review.rating,
-                        0,
-                      ) / product.reviews.length
-                    : 0;
+                const averageRating = totalReviews
+                  ? product.reviews.reduce(
+                      (acc, review) => acc + review.rating,
+                      0,
+                    ) / totalReviews
+                  : 0;
 
                 return (
                   <Grid item xs={6} md={3} lg={2} key={index}>
