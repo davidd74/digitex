@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { BASE_URL } from "../utils/constants";
 
 const useCookieVerification = (typeofRoute) => {
   const [isAuthorized, setIsAuthorized] = useState(null);
@@ -9,7 +10,7 @@ const useCookieVerification = (typeofRoute) => {
     const verifyCookie = async () => {
       try {
         const { data } = await axios.post(
-          `http://localhost:5000/${typeofRoute}`,
+          `${BASE_URL}/${typeofRoute}`,
           {},
           { withCredentials: true },
         );
