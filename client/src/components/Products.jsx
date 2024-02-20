@@ -7,50 +7,42 @@ import toast from "react-hot-toast";
 import RatingFormula from "./RatingFormula";
 
 const Products = () => {
-  // const { data, isLoading, error } = useGetProductsQuery();
-  const data = [
-    {
-      price: 100,
-      rating: 4,
-      image: "nema slike bajo",
-    },
-  ];
-
-  const [loading, setLoading] = useState(false);
+  const { data, isLoading, error } = useGetProductsQuery();
+  const [loading, setLoading] = useState(true);
 
   console.log(data);
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   if (data && data.length > 0) {
-  //     let imagesToLoad = data.length;
+  useEffect(() => {
+    setLoading(true);
+    if (data && data.length > 0) {
+      let imagesToLoad = data.length;
 
-  //     const handleImageLoad = () => {
-  //       imagesToLoad--;
-  //       if (imagesToLoad === 0) {
-  //         setLoading(false);
-  //       }
-  //     };
+      const handleImageLoad = () => {
+        imagesToLoad--;
+        if (imagesToLoad === 0) {
+          setLoading(false);
+        }
+      };
 
-  //     data.forEach((product) => {
-  //       const imageElement = new Image();
-  //       imageElement.src = product.image.url;
-  //       imageElement.addEventListener("load", handleImageLoad);
+      data.forEach((product) => {
+        const imageElement = new Image();
+        imageElement.src = product.image.url;
+        imageElement.addEventListener("load", handleImageLoad);
 
-  //       return () => {
-  //         imageElement.removeEventListener("load", handleImageLoad);
-  //       };
-  //     });
-  //   }
-  // }, [data]);
+        return () => {
+          imageElement.removeEventListener("load", handleImageLoad);
+        };
+      });
+    }
+  }, [data]);
 
-  // if (error) {
-  //   toast.error(error);
-  // }
+  if (error) {
+    toast.error(error);
+  }
 
   return (
     <div>
-      {loading ? (
+      {isLoading || loading ? (
         <div className="flex items-center justify-center h-screen">
           <SyncLoader color="#58B1FF" />
         </div>
@@ -59,12 +51,10 @@ const Products = () => {
           <Grid container spacing={2.5} marginTop={"3.5rem"}>
             {data &&
               data?.map((product) => {
-                // const averageRating = product.reviews.reduce(
-                //   (acc, review) => acc + review.rating,
-                //   0,
-                // );
-
-                const averageRating = 3.5;
+                const averageRating = product.reviews.reduce(
+                  (acc, review) => acc + review.rating,
+                  0,
+                );
 
                 return (
                   <Grid item xs={6} md={3} lg={2} key={product._id}>
