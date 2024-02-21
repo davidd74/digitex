@@ -14,11 +14,6 @@ const Products = () => {
   if (data) {
     console.log(data);
   }
-  console.log("is loading");
-  console.log(isLoading);
-
-  console.log("loading");
-  console.log(loading);
 
   // const productData = [
   //   {
@@ -53,10 +48,6 @@ const Products = () => {
     }
   }, [data]);
 
-  if (error) {
-    toast.error(error);
-  }
-
   return (
     <div>
       {loading || isLoading ? (
@@ -68,8 +59,6 @@ const Products = () => {
           <Grid container spacing={2.5} marginTop={"3.5rem"}>
             {data &&
               data?.map((product, index) => {
-                console.log("Product image URL:", product.image.url);
-                console.log("Product reviews:", product.reviews);
                 const totalReviews = product.reviews.length;
 
                 const averageRating = totalReviews
