@@ -35,7 +35,6 @@ const corsOptions = {
     "https://digitex-web.netlify.app",
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
-  origin: true,
   credentials: true,
 };
 
