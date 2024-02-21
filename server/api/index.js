@@ -8,7 +8,6 @@ import AuthRoute from "../routes/AuthRoute.js";
 import ProductRoute from "../routes/ProductRoute.js";
 import UserProfileRoute from "../routes/UserProfileRoute.js";
 import OrderRoute from "../routes/OrderRoute.js";
-import bcrypt from "bcrypt";
 
 const { MONGO_URL, PORT } = process.env;
 const app = express();
