@@ -57,7 +57,7 @@ const Navbar = () => {
         }}
       >
         <Link to="/">
-          <img src={DIGITEX} alt="Digitex logo" className="w-[140px]" />
+          Digitex logo
         </Link>
         {/* desktop UL Navbar */}
         <ul className="items-center hidden gap-8 text-lg md:flex">
