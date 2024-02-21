@@ -48,7 +48,7 @@ export const Signup = async (req, res, next) => {
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
       withCredentials: true,
-      httpOnly: false,
+      httpOnly: true,
     });
 
     res
@@ -83,7 +83,7 @@ export const Login = async (req, res, next) => {
 
     res.cookie("token", token, {
       withCredentials: true,
-      httpOnly: false,
+      httpOnly: true,
     });
 
     res.status(201).json({ message: "Signed in!", success: true, user });
