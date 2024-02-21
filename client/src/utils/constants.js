@@ -2,7 +2,7 @@
 export const production = true;
 
 export const BASE_URL = production
-  ? "https://digitex-server.vercel.app"
+  ? "https://digitex-pbta.onrender.com"
   : "http://localhost:5000";
 
 export const PRODUCTS_URL = `${BASE_URL}/products`;

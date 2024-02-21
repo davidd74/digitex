@@ -32,7 +32,7 @@ const corsOptions = {
   origin: [
     "http://192.168.8.103:5173",
     "http://localhost:5173",
-    "https://digitex.vercel.app",
+    "https://digitex-web.netlify.app",
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
