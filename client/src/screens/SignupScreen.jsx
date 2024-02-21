@@ -40,7 +40,11 @@ const SignupScreen = () => {
 
     if (Object.keys(errors).length !== 0) {
       Object.values(errors).forEach((error) => {
-        toast.error(error, {});
+        if (typeof error === "string") {
+          toast.error(error, {});
+        } else {
+          console.error("Error is not a string:", error);
+        }
       });
       return;
     }
@@ -82,9 +86,9 @@ const SignupScreen = () => {
   };
 
   return (
-    <div className="relative flex h-screen w-full flex-col justify-center overflow-hidden bg-authimg bg-cover bg-center">
+    <div className="relative flex flex-col justify-center w-full h-screen overflow-hidden bg-center bg-cover bg-authimg">
       {isLoading ? (
-        <div className="flex h-screen items-center justify-center">
+        <div className="flex items-center justify-center h-screen">
           <SyncLoader color="#58B1FF" />
         </div>
       ) : (
@@ -99,18 +103,18 @@ const SignupScreen = () => {
             </Link>
           </Container>
           <Container style={{ height: "100%" }}>
-            <div className="flex h-full w-full flex-col justify-center xs:w-full lg:w-2/3 2xl:w-2/3">
+            <div className="flex flex-col justify-center w-full h-full xs:w-full lg:w-2/3 2xl:w-2/3">
               <h3 className="text-sm font-medium tracking-widest text-neutral-300 md:text-lg">
                 START SHOPPING TODAY
               </h3>
               <h1 className="pt-1 text-4xl font-semibold md:text-6xl lg:text-5xl xl:text-6xl">
                 Create a new account.
               </h1>
-              <p className="py-7 text-sm text-neutral-300 md:text-base">
+              <p className="text-sm py-7 text-neutral-300 md:text-base">
                 Already have an account? &nbsp;
                 <Link
                   to="/login"
-                  className="font-medium text-primary-400 transition-colors duration-300 hover:text-primary-600"
+                  className="font-medium transition-colors duration-300 text-primary-400 hover:text-primary-600"
                 >
                   Log in.
                 </Link>
@@ -126,7 +130,7 @@ const SignupScreen = () => {
                       error={!!formErrors.firstName}
                       autoComplete="given-name"
                       onChange={handleInputChange}
-                      icon={<BiSolidContact className="text-md text-white" />}
+                      icon={<BiSolidContact className="text-white text-md" />}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
@@ -139,7 +143,7 @@ const SignupScreen = () => {
                       error={!!formErrors.lastName}
                       autoComplete="family-name"
                       onChange={handleInputChange}
-                      icon={<BiSolidContact className="text-md text-white" />}
+                      icon={<BiSolidContact className="text-white text-md" />}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -165,7 +169,7 @@ const SignupScreen = () => {
                       icon={
                         <MdMail
                           fontSize={"1.5rem"}
-                          className="text-md text-white"
+                          className="text-white text-md"
                         />
                       }
                     />
