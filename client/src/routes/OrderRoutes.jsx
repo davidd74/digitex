@@ -16,7 +16,7 @@ const OrderRoutes = () => {
     }
 
     axios
-      .post(`http://${BASE_URL}/orderauth`, { id }, { withCredentials: true })
+      .post(`https://${BASE_URL}/orderauth`, { id }, { withCredentials: true })
       .then((response) => {
         if (response.data.status === false) {
           toast.error("You do not have permission to access this order.");
