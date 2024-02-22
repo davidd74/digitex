@@ -32,7 +32,7 @@ const Products = () => {
       const handleImageLoad = () => {
         imagesToLoad--;
         if (imagesToLoad === 0) {
-          setLoading(true);
+          setLoading(false);
         }
       };
 
