@@ -50,7 +50,7 @@ const Products = () => {
 
   return (
     <div>
-      {loading ? (
+      {loading || isLoading ? (
         <div className="flex h-[35vh] flex-col items-center justify-center gap-6">
           <SyncLoader color="#58B1FF" />
           <p className="pt-4 font-semibold tracking-wide text-center">
