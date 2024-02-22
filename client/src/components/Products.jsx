@@ -32,7 +32,7 @@ const Products = () => {
       const handleImageLoad = () => {
         imagesToLoad--;
         if (imagesToLoad === 0) {
-          setLoading(false);
+          setLoading(true);
         }
       };
 
@@ -50,9 +50,13 @@ const Products = () => {
 
   return (
     <div>
-      {loading || isLoading ? (
-        <div className="flex items-center justify-center h-screen">
+      {loading ? (
+        <div className="flex h-[35vh] flex-col items-center justify-center gap-6">
           <SyncLoader color="#58B1FF" />
+          <p className="pt-4 font-semibold tracking-wide text-center">
+            It takes a while to fetch all products because I am using free
+            hosting.
+          </p>
         </div>
       ) : (
         <div>
