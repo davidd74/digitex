@@ -36,7 +36,7 @@ const HomeScreen = () => {
             className="bg-start h-[225px] w-full rounded-[0.65rem] bg-apple_banner bg-cover bg-no-repeat sm:h-[300px] md:h-[350px] lg:h-[500px]  xl:bg-center 2xl:h-[530px]"
             onClick={() => navigate(`/product/64e5f3f795851c5c5ea9ca55`)}
           ></div>
-          <div
+        <div
             className="bg-start h-[225px] w-full rounded-[0.65rem] bg-xiaomi_banner bg-cover bg-no-repeat sm:h-[300px] md:h-[350px] lg:h-[500px]  xl:bg-center 2xl:h-[530px]"
             onClick={() => navigate(`/product/658c8bd97f5374a178cdf460`)}
           ></div>
